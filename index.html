@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="3D Scene Understanding, 3D Visual Grounding">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3EED</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+
+  <link rel="icon" href="./static/images/icon.png" type="image/x-icon">
+
+
+  <style>
+    .a {
+      color: rgb(0, 180, 139);
+    }
+
+    .columns {
+      display: flex;
+      justify-content: flex-start;
+      padding: 5px;
+      text-align: left;
+    }
+
+    .tag {
+      background-color: #f5f5f5;
+      border-radius: 3px;
+      padding: 5px;
+      margin-right: 5px;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+
+  <style>
+    a.external-link:hover {
+      background-color: rgb(109, 109, 109) !important;
+      border-color: rgb(109, 109, 109) !important;
+    }
+  </style>
+
+  <link rel="icon" href="./static/images/icon.png" type="image/x-icon">
+  <!-- <link rel="apple-touch-icon" sizes="180x180" href="./static/images/apple-touch-icon.png"> -->
+
+
+
+  <style>
+    #backToTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 50px;
+      z-index: 999;
+      background-color: rgb(0, 180, 139);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 12px 16px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: opacity 0.3s;
+      display: none;
+    }
+
+    #backToTopBtn:hover {
+      background-color: rgb(239, 99, 75);
+    }
+
+    @media (max-width: 768px) {
+      #backToTopBtn {
+        font-size: 18px;
+        padding: 10px 14px;
+      }
+    }
+
+    .img-hover-effect {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .img-hover-effect:hover {
+      transform: scale(1.05);
+      /* Zoom to 105% */
+    }
+  </style>
+
+</head>
+
+
+
+
+<body>
+
+
+  <button onclick="scrollToTop()" id="backToTopBtn" title="Go to top">↑</button>
+  <script>
+    window.onscroll = function () {
+      scrollFunction();
+    };
+    function scrollFunction() {
+      const button = document.getElementById("backToTopBtn");
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        button.style.display = "block";
+      } else {
+        button.style.display = "none";
+      }
+    }
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              3EED: Ground Everything Everywhere in 3D
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://rongli.tech/" target="_blank"><strong>Rong
+                    Li</strong></a><sup>1,*</sup>&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://github.com/dongyh20" target="_blank"><strong>Yuhao
+                    Dong</strong></a><sup>2,*</sup>&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=en&user=RJ7NR54AAAAJ" target="_blank">
+                  <strong>Tianshuai
+                    Hu</strong></a><sup>3,*</sup>&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://alanliangc.github.io/" target="_blank"><strong>Ao
+                    Liang</strong></a><sup>4,*</sup>&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=J9a48hMAAAAJ&hl=en" target="_blank"><strong>Youquan
+                    Liu</strong></a><sup>5,*</sup>&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://dylanorange.github.io/" target="_blank"><strong>Dongyue
+                    Lu</strong></a><sup>4,*</sup>&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=lSDISOcAAAAJ" target="_blank"><strong>Liang
+                    Pan</strong></a><sup>6</sup>
+              </span></br>
+              <span class="author-block">
+                <a href="https://ldkong.com/" target="_blank"><strong>Lingdong
+                    Kong</strong></a><sup>4,&#8224;</sup>&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://junweiliang.me/" target="_blank"><strong>Junwei
+                    Liang</strong></a><sup>1,3,&#9993;</sup>&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://liuziwei7.github.io/" target="_blank"><strong>Ziwei
+                    Liu</strong></a><sup>2,&#9993;</sup>
+              </span>
+            </div>
+
+            <br />
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <sup>1</sup>HKUST(GZ)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <sup>2</sup>NTU&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <sup>3</sup>HKUST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <sup>4</sup>NUS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <sup>5</sup>FDU&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <sup>6</sup>Shanghai AI Laboratory
+              </span>
+              </br>
+              <span style="font-size: 0.85em;">
+                * Equal Contributions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &#8224; Project Lead&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &#9993; Corresponding Authors
+              </span>
+            </div>
+
+            <br />
+
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="static/images/NeurIPS2025_3EED_full.pdf" target="_blank" class="external-link button is-dark"
+                  style="background-color: rgb(0,180,139); color: white; border-color: rgb(0,180,139);">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span><b>Paper</b></span>
+                </a>
+              </span>
+              &nbsp;
+              &nbsp;
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/3EED/3EED" target="_blank" class="external-link button is-dark"
+                  style="background-color: rgb(239,99,75); color: white; border-color: rgb(239,99,75);">
+                  <span class="icon"><i class="fas fa-database"></i></span>
+                  <span><b>Dataset</b></span>
+                </a>
+              </span>
+              &nbsp;
+              &nbsp;
+              <span class="link-block">
+                <a href="https://github.com/iris0329/3eed" target="_blank" class="external-link button is-dark"
+                  style="background-color: rgb(99,113,250); color: white; border-color: rgb(99,113,250);">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span><b>GitHub</b></span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="margin-top: -100px;"></section>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class=" column is-full-width has-text-centered">
+        <img src="./static/images/teaser.png" />
+        <div class="content has-text-justified" style="padding-top: 10px">
+          <p>
+            Multi-modal, multi-platform 3D grounding from <strong><span style="color: rgb(0,180,139)">3</span><span
+                style="color: rgb(239,99,75)">E</span><span style="color: rgb(99,113,250)">E</span><span
+                style="color: rgb(109,109,109)">D</span></strong>.
+            Given a scene and a structured natural language expression, the task is to localize the referred object in
+            3D space.
+            Our dataset captures diverse embodied viewpoints from three robot platforms:
+            <img src="static/images/vehicle.png" loading="lazy" style="height: 18px; vertical-align: top;">
+            <strong>Vehicle</strong>, <img src="static/images/drone.png" loading="lazy"
+              style="height: 18px; vertical-align: top;"> <strong>Drone</strong>, and <img
+              src="static/images/quadruped.png" loading="lazy" style="height: 18px; vertical-align: top;">
+            <strong>Quadruped</strong>,
+            presenting unique challenges in spatial reasoning, scene analysis, and cross-platform 3D generalization.
+          </p>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+  <section class="section" style="margin-top: 0px;">
+    <div class="container is-max-desktop">
+
+      <div class="columns is-centered">
+        <div class="column is-full-width has-text-centered">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified" style="padding-top: 0px">
+            <p>
+              Visual grounding in 3D is the key for embodied agents to localize language-referred objects in open-world
+              environments.
+              However, existing benchmarks are limited to indoor focus, single-platform constraints, and small scale.
+              We introduce <strong><span style="color: rgb(0,180,139)">3</span><span
+                  style="color: rgb(239,99,75)">E</span><span style="color: rgb(99,113,250)">E</span><span
+                  style="color: rgb(109,109,109)">D</span></strong>,
+              a <i>multi-platform</i>, <i>multi-modal</i> 3D grounding benchmark featuring RGB and LiDAR data from
+              <strong>Vehicle</strong>, <strong>Drone</strong>, and <strong>Quadruped</strong> platforms.
+              We provide over <strong>134,000 objects</strong> and <strong>25,000 validated referring
+                expressions</strong> across diverse outdoor scenes -- <strong>10x larger</strong> than existing
+              datasets.
+              We develop a scalable annotation pipeline combining vision-language model prompting with human
+              verification to ensure high-quality spatial grounding. To support cross-platform learning, we propose
+              platform-aware normalization and cross-modal alignment techniques, and establish benchmark protocols for
+              in-domain and cross-platform evaluations. Our findings reveal significant performance gaps, highlighting
+              the challenges and opportunities of generalizable 3D grounding. The 3EED dataset and benchmark toolkit are
+              released to advance future research in language-driven 3D embodied perception.
+            </p>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  </br>
+
+
+  <div class="columns is-centered has-text-centered">
+    <div class="ontainer is-max-desktop">
+      <h2 class="title is-3">
+        Benchmark Comparison
+      </h2>
+      <div class="table-container">
+        <table class="table is-bordered is-striped is-hoverable">
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Sensor</th>
+              <th><img src="static/images/vehicle.png" loading="lazy"
+                  style="height: 25px; vertical-align: middle;"></br><strong><span
+                    style="color: rgb(0,180,139)">Vehicle</span></strong></th>
+              <th><img src="static/images/drone.png" loading="lazy"
+                  style="height: 25px; vertical-align: middle;"></br><strong><span
+                    style="color: rgb(239,99,75)">Drone</span></strong></th>
+              <th><img src="static/images/quadruped.png" loading="lazy"
+                  style="height: 25px; vertical-align: middle;"></br><strong><span
+                    style="color: rgb(99,113,250)">Quadruped</span></strong></th>
+              <th>Scene Coverage</th>
+              <th>#Scenes</th>
+              <th>#Objects</th>
+              <th>#Expr.</th>
+              <th>Elevation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mono3DRefer</td>
+              <td>C</td>
+              <td><span style="color: rgb(0,180,139)">✓</span></td>
+              <td><span style="color: rgb(239,99,75)">✗</span></td>
+              <td><span style="color: rgb(99,113,250)">✗</span></td>
+              <td>140m x 140m</td>
+              <td>2,025</td>
+              <td>8,228</td>
+              <td>41,140</td>
+              <td>42.8m</td>
+            </tr>
+            <tr>
+              <td>KITTI360Pose</td>
+              <td>L</td>
+              <td><span style="color: rgb(0,180,139)">✓</span></td>
+              <td><span style="color: rgb(239,99,75)">✗</span></td>
+              <td><span style="color: rgb(99,113,250)">✗</span></td>
+              <td>140m x 140m</td>
+              <td>-</td>
+              <td>14,934</td>
+              <td>43,381</td>
+              <td>42.8m</td>
+            </tr>
+            <tr>
+              <td>CityRefer</td>
+              <td>L</td>
+              <td><span style="color: rgb(0,180,139)">✗</span></td>
+              <td><span style="color: rgb(239,99,75)">✓</span></td>
+              <td><span style="color: rgb(99,113,250)">✗</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td>5,866</td>
+              <td>35,196</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>STRefer</td>
+              <td>L + C</td>
+              <td><span style="color: rgb(0,180,139)">✓</span></td>
+              <td><span style="color: rgb(239,99,75)">✗</span></td>
+              <td><span style="color: rgb(99,113,250)">✗</span></td>
+              <td>60m x 60m</td>
+              <td>662</td>
+              <td>3,581</td>
+              <td>5,458</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>LifeRefer</td>
+              <td>L + C</td>
+              <td><span style="color: rgb(0,180,139)">✓</span></td>
+              <td><span style="color: rgb(239,99,75)">✗</span></td>
+              <td><span style="color: rgb(99,113,250)">✗</span></td>
+              <td>60m x 60m</td>
+              <td>3,172</td>
+              <td>11,864</td>
+              <td>25,380</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Talk2LiDAR</td>
+              <td>L + C</td>
+              <td><span style="color: rgb(0,180,139)">✓</span></td>
+              <td><span style="color: rgb(239,99,75)">✗</span></td>
+              <td><span style="color: rgb(99,113,250)">✗</span></td>
+              <td>140m x 140m</td>
+              <td>6,419</td>
+              <td>-</td>
+              <td>59,207</td>
+              <td>48.6m</td>
+            </tr>
+            <tr>
+              <td>Talk2Car-3D</td>
+              <td>L + C</td>
+              <td><span style="color: rgb(0,180,139)">✓</span></td>
+              <td><span style="color: rgb(239,99,75)">✗</span></td>
+              <td><span style="color: rgb(99,113,250)">✗</span></td>
+              <td>140m x 140m</td>
+              <td>5,534</td>
+              <td>-</td>
+              <td>10,169</td>
+              <td>48.6m</td>
+            </tr>
+            <tr style="background-color: rgb(225, 251, 245)">
+              <td><strong>Ours</strong></td>
+              <td>L + C</td>
+              <td><span style="color: rgb(0,180,139)">✓</span></td>
+              <td><span style="color: rgb(239,99,75)">✓</span></td>
+              <td><span style="color: rgb(99,113,250)">✓</span></td>
+              <td><strong>280m x 240m</strong></td>
+              <td><strong>23,618</strong></td>
+              <td><strong>134,143</strong></td>
+              <td><strong>25,551</strong></td>
+              <td><strong>80m</strong></td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr>
+    </div>
+  </div>
+
+
+  </br></br>
+
+
+  <section class="section" style="margin-top: -100px;"></section>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class=" column is-full-width has-text-centered">
+        <h2 class="title is-3">Data Curation Pipeline</h2>
+        <img src="static/images/labeling.png" loading="lazy" />
+        <div class="content has-text-justified" style="padding-top: -100px">
+          <p>
+            <strong>Figure: Overview of the data annotation workflow. <span
+                style="color: rgb(0,180,139)">Left</span></strong>:
+            We collect 3D boxes using multi-detector
+            fusion, tracking, filtering,
+            and manual verification across platforms. <strong><span
+                style="color: rgb(99,113,250)">Middle</span></strong>: Referring
+            expressions are produced by prompting a VLM with
+            structured
+            cues (class, status, position, relations), followed by rule-based rewriting and human refinement.
+            <strong><span style="color: rgb(239,99,75)">Right</span></strong>:
+            Platform-specific word clouds highlight distinct linguistic patterns in descriptions across vehicle, drone,
+            and quadruped agents.
+          </p>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+  </br></br>
+
+
+  <section class="section" style="margin-top: -100px;"></section>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class=" column is-full-width has-text-centered">
+        <h2 class="title is-3">Dataset Statistics</h2>
+        <img src="static/images/statistics.png" loading="lazy" />
+        <div class="content has-text-justified" style="padding-top: -100px">
+          <p>
+            <strong>Figure:</strong> <strong>Left:</strong> Target bounding box distributions in polar coordinates.
+            Color intensity indicates the frequency
+            of targets in each <i>(ρ, θ<sup>r</sup>)</i> bin.
+            <strong>Middle:</strong> Scene distribution for train/val splits on each platform, along with per-scene
+            object count histograms.
+            <strong>Right:</strong> Elevation distributions of input point cloud, <i>p<sup>z</sup></i>, reflecting
+            view-dependent
+            elevation biases.
+          </p>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+  </br>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width has-text-centered">
+          <h2 class="title is-3"><strong><span style="color: rgb(0,180,139)">3</span><span
+                style="color: rgb(239,99,75)">E</span><span style="color: rgb(99,113,250)">E</span><span
+                style="color: rgb(109,109,109)">D</span></strong>: Single-Object Grounding</h2>
+          <p>
+            Data examples from the <img src="static/images/vehicle.png" loading="lazy"
+              style="height: 18px; vertical-align: top;">
+            <strong>Vehicle</strong> platform in our dataset.
+
+          </p>
+          <table class="table is-bordered is-striped is-narrow is-hoverable" style="width: 100%;">
+            <tbody>
+              <tr>
+                <td><img src="static/images/single-vech/single-vech-1-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-vech/single-vech-1-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/single-vech/single-vech-2-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-vech/single-vech-2-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/single-vech/single-vech-3-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-vech/single-vech-3-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/single-vech/single-vech-4-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-vech/single-vech-4-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          </br>
+
+          <p>
+
+            Data examples from the <img src="static/images/drone.png" loading="lazy"
+              style="height: 18px; vertical-align: top;">
+            <strong>Drone</strong> platform in our dataset.
+
+          </p>
+          <table class="table is-bordered is-striped is-narrow is-hoverable" style="width: 100%;">
+            <thead>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="static/images/single-drone/single-drone-1-1.png"
+                    style="height: 200px; object-fit: contain;" class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-drone/single-drone-1-2.png"
+                    style="height: 200px; object-fit: contain;" class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/single-drone/single-drone-2-1.png"
+                    style="height: 200px; object-fit: contain;" class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-drone/single-drone-2-1.png"
+                    style="height: 200px; object-fit: contain;" class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/single-drone/single-drone-3-1.png"
+                    style="height: 200px; object-fit: contain;" class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-drone/single-drone-3-2.png"
+                    style="height: 200px; object-fit: contain;" class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/single-drone/single-drone-4-1.png"
+                    style="height: 200px; object-fit: contain;" class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-drone/single-drone-4-2.png"
+                    style="height: 200px; object-fit: contain;" class="img-hover-effect" loading="lazy"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          </br>
+
+          <p>
+
+            Data examples from the <img src="static/images/quadruped.png" loading="lazy"
+              style="height: 18px; vertical-align: top;">
+            <strong>Quadruped</strong> platform in our dataset.
+
+          </p>
+          <table class="table is-bordered is-striped is-narrow is-hoverable" style="width: 100%;">
+            <thead>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="static/images/single-quad/single-quad-1-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-quad/single-quad-1-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/single-quad/single-quad-2-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-quad/single-quad-2-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/single-quad/single-quad-3-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-quad/single-quad-3-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/single-quad/single-quad-4-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/single-quad/single-quad-4-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width has-text-centered">
+          <h2 class="title is-3"><strong><span style="color: rgb(0,180,139)">3</span><span
+                style="color: rgb(239,99,75)">E</span><span style="color: rgb(99,113,250)">E</span><span
+                style="color: rgb(109,109,109)">D</span></strong>: Multi-Object Grounding</h2>
+          <table class="table is-bordered is-striped is-narrow is-hoverable" style="width: 100%;">
+            <tbody>
+              <tr>
+                <td><img src="static/images/multi-images/multi-1-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/multi-images/multi-1-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/multi-images/multi-2-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/multi-images/multi-2-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/multi-images/multi-3-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/multi-images/multi-3-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/multi-images/multi-4-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/multi-images/multi-4-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/multi-images/multi-5-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/multi-images/multi-5-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/multi-images/multi-6-1.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+                <td><img src="static/images/multi-images/multi-6-2.png" style="height: 200px; object-fit: contain;"
+                    class="img-hover-effect" loading="lazy"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </section>
+
+
+
+  <section class="section" id="team">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Team</h2>
+      <div class="columns is-multiline is-centered" style="margin-top: 2rem;">
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/rong.jpg" alt="Rong Li" loading="lazy">
+          </figure>
+          <p><strong>Rong Li</strong>*<br><small>HKUST(GZ)</small></p>
+        </div>
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/yuhao.jpg" alt="Yuhao Dong" loading="lazy">
+          </figure>
+          <p><strong>Yuhao Dong</strong>*<br><small>NTU</small></p>
+        </div>
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/tianshuai.png" alt="Tianshuai Hu" loading="lazy">
+          </figure>
+          <p><strong>Tianshuai Hu</strong>*<br><small>HKUST</small></p>
+        </div>
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/ao.jpg" alt="Ao Liang" loading="lazy">
+          </figure>
+          <p><strong>Ao Liang</strong>*<br><small>NUS</small></p>
+        </div>
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/youquan.png" alt="Youquan Liu" loading="lazy">
+          </figure>
+          <p><strong>Youquan Liu</strong>*<br><small>FDU</small></p>
+        </div>
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/dongyue.png" alt="Dongyue Lu" loading="lazy">
+          </figure>
+          <p><strong>Dongyue Lu</strong>*<br><small>NUS</small></p>
+        </div>
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/liang_pan.jpeg" alt="Liang Pan" loading="lazy">
+          </figure>
+          <p><strong>Liang Pan</strong><br><small>Shanghai AI Lab</small></p>
+        </div>
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/lingdong.jpg" alt="Lingdong Kong" loading="lazy">
+          </figure>
+          <p><strong>Lingdong Kong</strong><sup>&#8224;</sup><br><small>NUS</small></p>
+        </div>
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/junwei.jpeg" alt="Junwei Liang" loading="lazy">
+          </figure>
+          <p><strong>Junwei Liang</strong><sup>&#9993;</sup><br><small>HKUST(GZ)</small></p>
+        </div>
+
+        <div class="column is-one-fifth has-text-centered">
+          <figure class="image is-128x128 is-inline-block img-hover-effect">
+            <img class="is-rounded" src="static/people-image/ziwei.png" alt="Ziwei Liu" loading="lazy">
+          </figure>
+          <p><strong>Ziwei Liu</strong><sup>&#9993;</sup><br><small>NTU</small></p>
+        </div>
+
+      </div>
+      <p class="has-text-centered" style="font-size: 0.9rem; margin-top: 1rem;">
+        * Equal contributions &nbsp;&nbsp;&nbsp;&nbsp; &#8224; Project Lead &nbsp;&nbsp;&nbsp;&nbsp; &#9993;
+        Corresponding authors
+      </p>
+    </div>
+    </br></br>
+  </section>
+
+
+
+
+
+  <section class="section" id="BibTeX" style="margin-top: -20px;">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre style="border-radius: 10px;"><code>@article{li20253eed,
+    title  = {3EED: Ground Everything Everywhere in 3D},
+    author = {Rong Li and Yuhao Dong and Tianshuai Hu and Ao Liang and Youquan Liu and Dongyue Lu and Liang Pan and Lingdong Kong and Junwei Liang and Ziwei Liu},
+    year   = {2025},
+  }</code></pre>
+      <hr>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International</a> license.
+            </p>
+            <p>
+              We thank the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> authors for their
+              template, which we used as a basis for our website.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
+
+
+<!-- convert -density 300 /Users/rong/Downloads/project-3eed.github.io/static/images/labeling.pdf ./static/images/labeling.png -->
