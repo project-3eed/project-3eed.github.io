@@ -3,10 +3,31 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="">
-  <meta name="keywords" content="3D Scene Understanding, 3D Visual Grounding">
+  <meta name="description"
+    content="3EED: Ground Everything Everywhere in 3D - A multi-platform, multi-modal 3D grounding benchmark featuring RGB and LiDAR data from Vehicle, Drone, and Quadruped platforms. Over 134,000 objects and 25,000 validated referring expressions across diverse outdoor scenes.">
+  <meta name="keywords"
+    content="3D Scene Understanding, 3D Visual Grounding, Embodied AI, Multi-modal Learning, LiDAR, Point Cloud, NeurIPS 2025, Dataset">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>3EED</title>
+  <meta name="author"
+    content="Rong Li, Yuhao Dong, Tianshuai Hu, Ao Liang, Youquan Liu, Dongyue Lu, Liang Pan, Lingdong Kong, Junwei Liang, Ziwei Liu">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://project-3eed.github.io/">
+  <meta property="og:title" content="3EED: Ground Everything Everywhere in 3D">
+  <meta property="og:description"
+    content="A multi-platform, multi-modal 3D grounding benchmark with 134K+ objects and 25K+ referring expressions. Accepted to NeurIPS 2025 Datasets and Benchmarks Track.">
+  <meta property="og:image" content="https://project-3eed.github.io/static/images/teaser.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://project-3eed.github.io/">
+  <meta property="twitter:title" content="3EED: Ground Everything Everywhere in 3D">
+  <meta property="twitter:description"
+    content="A multi-platform, multi-modal 3D grounding benchmark with 134K+ objects and 25K+ referring expressions. Accepted to NeurIPS 2025 Datasets and Benchmarks Track.">
+  <meta property="twitter:image" content="https://project-3eed.github.io/static/images/teaser.png">
+
+  <title>3EED: Ground Everything Everywhere in 3D</title>
 
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
@@ -18,12 +39,19 @@
 
   <link rel="icon" href="./static/images/icon.png" type="image/x-icon">
 
-
+  <!-- Consolidated Styles -->
   <style>
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Color utilities */
     .a {
       color: rgb(0, 180, 139);
     }
 
+    /* Layout */
     .columns {
       display: flex;
       justify-content: flex-start;
@@ -31,6 +59,7 @@
       text-align: left;
     }
 
+    /* Tags */
     .tag {
       background-color: #f5f5f5;
       border-radius: 3px;
@@ -39,21 +68,20 @@
       font-size: 14px;
       color: #333;
     }
-  </style>
 
-  <style>
+    /* Links */
     a.external-link:hover {
       background-color: rgb(109, 109, 109) !important;
       border-color: rgb(109, 109, 109) !important;
     }
-  </style>
 
-  <link rel="icon" href="./static/images/icon.png" type="image/x-icon">
-  <!-- <link rel="apple-touch-icon" sizes="180x180" href="./static/images/apple-touch-icon.png"> -->
+    /* Navigation menu hover effects */
+    #navbar a:hover {
+      color: rgb(0, 180, 139) !important;
+      background-color: rgba(0, 180, 139, 0.1) !important;
+    }
 
-
-
-  <style>
+    /* Back to top button */
     #backToTopBtn {
       position: fixed;
       bottom: 20px;
@@ -75,20 +103,61 @@
       background-color: rgb(239, 99, 75);
     }
 
-    @media (max-width: 768px) {
-      #backToTopBtn {
-        font-size: 18px;
-        padding: 10px 14px;
-      }
-    }
-
+    /* Image hover effects */
     .img-hover-effect {
       transition: transform 0.3s ease-in-out;
     }
 
     .img-hover-effect:hover {
       transform: scale(1.05);
-      /* Zoom to 105% */
+    }
+
+    /* Copy button hover */
+    #copy-bibtex-btn:hover {
+      background-color: rgb(0, 150, 115) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      #backToTopBtn {
+        font-size: 18px;
+        padding: 10px 14px;
+        right: 20px;
+      }
+
+      #navbar {
+        font-size: 0.8em;
+        padding: 10px 8px;
+      }
+
+      #navbar a {
+        padding: 5px 8px;
+        font-size: 0.9em;
+      }
+
+      .table-container {
+        font-size: 0.85em;
+      }
+
+      .hero-body {
+        padding: 2rem 1rem !important;
+      }
+
+      .is-size-4 {
+        font-size: 1rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #navbar {
+        display: none;
+      }
+
+      .publication-title {
+        font-size: 1.5rem !important;
+      }
     }
   </style>
 
@@ -99,12 +168,44 @@
 
 <body>
 
+  <!-- Navigation Menu -->
+  <nav id="navbar" style="position: fixed; left: 0; top: 50%; transform: translateY(-50%); 
+                          background-color: white; box-shadow: 2px 0 10px rgba(0,0,0,0.1); 
+                          z-index: 1000; padding: 20px 15px; border-radius: 0 10px 10px 0;">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <a href="#" style="font-weight: bold; font-size: 1.2em; color: rgb(0,180,139); 
+         text-decoration: none; text-align: center; margin-bottom: 10px; padding-bottom: 10px; 
+         border-bottom: 2px solid rgb(0,180,139);">
+        3EED
+      </a>
+      <a href="#" onclick="smoothScroll(event, 0)" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
+               border-radius: 5px; white-space: nowrap;">Home</a>
+      <a href="#abstract" onclick="smoothScroll(event, 'abstract')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
+               border-radius: 5px; white-space: nowrap;">Abstract</a>
+      <a href="#comparison" onclick="smoothScroll(event, 'comparison')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
+               border-radius: 5px; white-space: nowrap;">Comparison</a>
+      <a href="#data-curation" onclick="smoothScroll(event, 'data-curation')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
+               border-radius: 5px; white-space: nowrap;">Data Curation Pipeline</a>
+      <a href="#statistics" onclick="smoothScroll(event, 'statistics')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
+               border-radius: 5px; white-space: nowrap;">Dataset Statistics</a>
+      <a href="#examples" onclick="smoothScroll(event, 'examples')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
+               border-radius: 5px; white-space: nowrap;">Examples</a>
+      <a href="#team" onclick="smoothScroll(event, 'team')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
+               border-radius: 5px; white-space: nowrap;">Team</a>
+      <a href="#BibTeX" onclick="smoothScroll(event, 'BibTeX')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
+               border-radius: 5px; white-space: nowrap;">BibTeX</a>
+    </div>
+  </nav>
 
   <button onclick="scrollToTop()" id="backToTopBtn" title="Go to top">↑</button>
   <script>
+    // Smooth scroll for all links
+    document.documentElement.style.scrollBehavior = 'smooth';
+
     window.onscroll = function () {
       scrollFunction();
     };
+
     function scrollFunction() {
       const button = document.getElementById("backToTopBtn");
       if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -113,8 +214,24 @@
         button.style.display = "none";
       }
     }
+
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function smoothScroll(event, target) {
+      event.preventDefault();
+      if (target === 0) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const element = document.getElementById(target);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }
     }
   </script>
 
@@ -127,6 +244,10 @@
             <h1 class="title is-1 publication-title">
               3EED: Ground Everything Everywhere in 3D
             </h1>
+
+            <p class="is-size-4 has-text-weight-semibold" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+              <span class="tag is-large">Accepted to NeurIPS 2025 Datasets and Benchmarks Track</span>
+            </p>
 
             <div class="is-size-5 publication-authors">
               <span class="author-block">
@@ -196,7 +317,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="static/images/NeurIPS2025_3EED_full.pdf" target="_blank" class="external-link button is-dark"
+                <a href="static/images/paper.pdf" target="_blank" class="external-link button is-dark"
                   style="background-color: rgb(0,180,139); color: white; border-color: rgb(0,180,139);">
                   <span class="icon"><i class="fas fa-file-pdf"></i></span>
                   <span><b>Paper</b></span>
@@ -205,7 +326,8 @@
               &nbsp;
               &nbsp;
               <span class="link-block">
-                <a href="https://huggingface.co/datasets/3EED/3EED" target="_blank" class="external-link button is-dark"
+                <a href="https://huggingface.co/datasets/RRRong/3EED" target="_blank"
+                  class="external-link button is-dark"
                   style="background-color: rgb(239,99,75); color: white; border-color: rgb(239,99,75);">
                   <span class="icon"><i class="fas fa-database"></i></span>
                   <span><b>Dataset</b></span>
@@ -257,7 +379,7 @@
   </section>
 
 
-  <section class="section" style="margin-top: 0px;">
+  <section class="section" id="abstract" style="margin-top: 0px;">
     <div class="container is-max-desktop">
 
       <div class="columns is-centered">
@@ -294,13 +416,13 @@
   </br>
 
 
-  <div class="columns is-centered has-text-centered">
+  <div id="comparison" class="columns is-centered has-text-centered">
     <div class="ontainer is-max-desktop">
       <h2 class="title is-3">
         Benchmark Comparison
       </h2>
-      <div class="table-container">
-        <table class="table is-bordered is-striped is-hoverable">
+      <div class="table-container" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        <table class="table is-bordered is-striped is-hoverable" style="min-width: 800px;">
           <thead>
             <tr>
               <th>Dataset</th>
@@ -413,9 +535,9 @@
               <td><span style="color: rgb(239,99,75)">✓</span></td>
               <td><span style="color: rgb(99,113,250)">✓</span></td>
               <td><strong>280m x 240m</strong></td>
-              <td><strong>23,618</strong></td>
-              <td><strong>134,143</strong></td>
-              <td><strong>25,551</strong></td>
+              <td><strong>20367</strong></td>
+              <td><strong>128,735</strong></td>
+              <td><strong>22,439</strong></td>
               <td><strong>80m</strong></td>
 
             </tr>
@@ -430,7 +552,7 @@
   </br></br>
 
 
-  <section class="section" style="margin-top: -100px;"></section>
+  <section class="section" id="data-curation" style="margin-top: -100px;"></section>
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class=" column is-full-width has-text-centered">
@@ -462,7 +584,7 @@
   </br></br>
 
 
-  <section class="section" style="margin-top: -100px;"></section>
+  <section class="section" id="statistics" style="margin-top: -100px;"></section>
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class=" column is-full-width has-text-centered">
@@ -490,7 +612,7 @@
   </br>
 
 
-  <section class="section">
+  <section class="section" id="examples">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-full-width has-text-centered">
@@ -764,14 +886,48 @@
   <section class="section" id="BibTeX" style="margin-top: -20px;">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre style="border-radius: 10px;"><code>@article{li20253eed,
-    title  = {3EED: Ground Everything Everywhere in 3D},
-    author = {Rong Li and Yuhao Dong and Tianshuai Hu and Ao Liang and Youquan Liu and Dongyue Lu and Liang Pan and Lingdong Kong and Junwei Liang and Ziwei Liu},
-    year   = {2025},
-  }</code></pre>
+      <div style="position: relative;">
+        <pre id="bibtex-content"
+          style="border-radius: 10px; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;"><code>@inproceedings{li20253eed,
+   title      = {3EED: Ground Everything Everywhere in 3D},
+   author     = {Rong Li and Yuhao Dong and Tianshuai Hu and Ao Liang and Youquan Liu and Dongyue Lu and Liang Pan and Lingdong Kong and Junwei Liang and Ziwei Liu},
+   booktitle  = {NeurIPS 2025 Datasets and Benchmarks Track},
+   year       = {2025},
+ }</code></pre>
+        <button id="copy-bibtex-btn" onclick="copyBibtex()" style="position: absolute; top: 10px; right: 10px; 
+                       background-color: rgb(0,180,139); color: white; 
+                       border: none; border-radius: 5px; padding: 8px 16px; 
+                       cursor: pointer; font-size: 14px; transition: all 0.3s;">
+          <i class="fas fa-copy"></i> Copy
+        </button>
+      </div>
       <hr>
     </div>
   </section>
+
+  <script>
+    function copyBibtex() {
+      const bibtexText = `@inproceedings{li20253eed,
+   title      = {3EED: Ground Everything Everywhere in 3D},
+   author     = {Rong Li and Yuhao Dong and Tianshuai Hu and Ao Liang and Youquan Liu and Dongyue Lu and Liang Pan and Lingdong Kong and Junwei Liang and Ziwei Liu},
+   booktitle  = {NeurIPS 2025 Datasets and Benchmarks Track},
+   year       = {2025},
+ }`;
+
+      navigator.clipboard.writeText(bibtexText).then(() => {
+        const btn = document.getElementById('copy-bibtex-btn');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.style.backgroundColor = 'rgb(72, 187, 120)';
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.style.backgroundColor = 'rgb(0,180,139)';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
 
   <footer class="footer">
     <div class="container">
