@@ -41,11 +41,6 @@
 
   <!-- Consolidated Styles -->
   <style>
-    /* Smooth scrolling */
-    html {
-      scroll-behavior: smooth;
-    }
-
     /* Color utilities */
     .a {
       color: rgb(0, 180, 139);
@@ -75,34 +70,6 @@
       border-color: rgb(109, 109, 109) !important;
     }
 
-    /* Navigation menu hover effects */
-    #navbar a:hover {
-      color: rgb(0, 180, 139) !important;
-      background-color: rgba(0, 180, 139, 0.1) !important;
-    }
-
-    /* Back to top button */
-    #backToTopBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 50px;
-      z-index: 999;
-      background-color: rgb(0, 180, 139);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      padding: 12px 16px;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-      transition: opacity 0.3s;
-      display: none;
-    }
-
-    #backToTopBtn:hover {
-      background-color: rgb(239, 99, 75);
-    }
-
     /* Image hover effects */
     .img-hover-effect {
       transition: transform 0.3s ease-in-out;
@@ -118,47 +85,6 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-
-    /* Mobile responsive styles */
-    @media (max-width: 768px) {
-      #backToTopBtn {
-        font-size: 18px;
-        padding: 10px 14px;
-        right: 20px;
-      }
-
-      #navbar {
-        font-size: 0.8em;
-        padding: 10px 8px;
-      }
-
-      #navbar a {
-        padding: 5px 8px;
-        font-size: 0.9em;
-      }
-
-      .table-container {
-        font-size: 0.85em;
-      }
-
-      .hero-body {
-        padding: 2rem 1rem !important;
-      }
-
-      .is-size-4 {
-        font-size: 1rem !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      #navbar {
-        display: none;
-      }
-
-      .publication-title {
-        font-size: 1.5rem !important;
-      }
-    }
   </style>
 
 </head>
@@ -167,74 +93,6 @@
 
 
 <body>
-
-  <!-- Navigation Menu -->
-  <nav id="navbar" style="position: fixed; left: 0; top: 50%; transform: translateY(-50%); 
-                          background-color: white; box-shadow: 2px 0 10px rgba(0,0,0,0.1); 
-                          z-index: 1000; padding: 20px 15px; border-radius: 0 10px 10px 0;">
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      <a href="#" style="font-weight: bold; font-size: 1.2em; color: rgb(0,180,139); 
-         text-decoration: none; text-align: center; margin-bottom: 10px; padding-bottom: 10px; 
-         border-bottom: 2px solid rgb(0,180,139);">
-        3EED
-      </a>
-      <a href="#" onclick="smoothScroll(event, 0)" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
-               border-radius: 5px; white-space: nowrap;">Home</a>
-      <a href="#abstract" onclick="smoothScroll(event, 'abstract')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
-               border-radius: 5px; white-space: nowrap;">Abstract</a>
-      <a href="#comparison" onclick="smoothScroll(event, 'comparison')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
-               border-radius: 5px; white-space: nowrap;">Comparison</a>
-      <a href="#data-curation" onclick="smoothScroll(event, 'data-curation')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
-               border-radius: 5px; white-space: nowrap;">Data Curation Pipeline</a>
-      <a href="#statistics" onclick="smoothScroll(event, 'statistics')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
-               border-radius: 5px; white-space: nowrap;">Dataset Statistics</a>
-      <a href="#examples" onclick="smoothScroll(event, 'examples')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
-               border-radius: 5px; white-space: nowrap;">Examples</a>
-      <a href="#team" onclick="smoothScroll(event, 'team')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
-               border-radius: 5px; white-space: nowrap;">Team</a>
-      <a href="#BibTeX" onclick="smoothScroll(event, 'BibTeX')" style="color: #333; text-decoration: none; transition: color 0.3s; padding: 8px 12px; 
-               border-radius: 5px; white-space: nowrap;">BibTeX</a>
-    </div>
-  </nav>
-
-  <button onclick="scrollToTop()" id="backToTopBtn" title="Go to top">↑</button>
-  <script>
-    // Smooth scroll for all links
-    document.documentElement.style.scrollBehavior = 'smooth';
-
-    window.onscroll = function () {
-      scrollFunction();
-    };
-
-    function scrollFunction() {
-      const button = document.getElementById("backToTopBtn");
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        button.style.display = "block";
-      } else {
-        button.style.display = "none";
-      }
-    }
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function smoothScroll(event, target) {
-      event.preventDefault();
-      if (target === 0) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        const element = document.getElementById(target);
-        if (element) {
-          const offset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
-          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        }
-      }
-    }
-  </script>
-
 
   <section class="hero">
     <div class="hero-body">
